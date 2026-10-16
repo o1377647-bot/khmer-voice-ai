@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="km">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111936">
+<title>Khmer Voice AI</title>
+<style>
+:root{--bg:#0a1024;--panel:#121b38;--panel2:#182449;--blue:#3978ff;--purple:#8b5cf6;--text:#f6f7ff;--muted:#aab5d2;--line:#2a3762}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#20245c 0,transparent 42%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Khmer",sans-serif}
+.wrap{max-width:850px;margin:auto;padding:22px 15px 48px}.brand{display:flex;align-items:center;gap:12px;margin:8px 0 22px}.logo{width:50px;height:50px;border-radius:16px;background:linear-gradient(135deg,var(--blue),var(--purple));display:grid;place-items:center;font-size:25px;box-shadow:0 8px 30px #3978ff44}.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{margin-left:auto;font-size:11px;color:#c8d4ff;border:1px solid #3c4c81;padding:6px 9px;border-radius:99px}
+.hero{padding:22px 20px;border:1px solid #35457c;border-radius:24px;background:linear-gradient(130deg,#182b60,#32205c);margin-bottom:16px}.hero h2{margin:0 0 8px;font-size:23px;line-height:1.45}.hero p{margin:0;color:#d5ddff;line-height:1.7;font-size:14px}.card{background:linear-gradient(180deg,#141e3c,#101831);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0}.card h3{font-size:16px;margin:0 0 13px}.label{display:block;color:#d8e0fb;font-size:13px;margin-bottom:8px}textarea,input[type=text]{width:100%;border:1px solid #35436b;border-radius:14px;background:#0a1229;color:var(--text);padding:14px;font:inherit;outline:none}textarea{min-height:145px;resize:vertical;line-height:1.8}textarea:focus,input:focus{border-color:#7b7dff;box-shadow:0 0 0 3px #6c63ff22}.count{color:var(--muted);font-size:12px;text-align:right;margin-top:6px}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}button,.filebtn{border:0;border-radius:12px;padding:12px 15px;font:inherit;font-size:14px;font-weight:650;cursor:pointer}.primary{color:white;background:linear-gradient(100deg,var(--blue),var(--purple));flex:1}.secondary,.filebtn{background:#202c50;color:#e3e9ff;border:1px solid #3a4a79}.danger{background:#51283f;color:#ffdbe8;border:1px solid #80405e}button:disabled{opacity:.45;cursor:not-allowed}.notice{font-size:12px;line-height:1.7;color:var(--muted);margin:12px 0 0}.status{padding:11px 12px;border-radius:12px;background:#101a35;border:1px solid var(--line);font-size:13px;line-height:1.6;color:#dbe4ff;margin-top:12px;overflow-wrap:anywhere}.wave{height:58px;display:flex;align-items:center;justify-content:center;gap:4px;margin:8px 0 14px}.wave i{display:block;width:4px;border-radius:6px;background:linear-gradient(var(--blue),var(--purple));height:var(--h)}.recordrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.recordrow button{flex:1}.small{font-size:12px;color:var(--muted);line-height:1.65}.tag{display:inline-block;border:1px solid #3a4b7c;border-radius:99px;padding:4px 8px;color:#cbd6ff;font-size:11px;margin-bottom:10px}.footer{text-align:center;color:#8492b8;font-size:12px;line-height:1.7;margin:22px 4px}.hidden{display:none!important}audio{width:100%;margin-top:12px}a{color:#aebdff}@media(min-width:650px){.wrap{padding-top:34px}.hero{padding:28px}.hero h2{font-size:28px}.card{padding:22px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="brand">
+    <div class="logo">🎙️</div><div><h1>Khmer Voice AI</h1><p>អក្សរខ្មែរ ទៅជាសំឡេង</p></div><span class="pill">BETA DEMO</span>
+  </header>
+  <section class="hero">
+    <span class="tag">សាកល្បងលើទូរសព្ទ</span>
+    <h2>ឱ្យអត្ថបទរបស់អ្នកមានសំឡេង 🎧</h2>
+    <p>បញ្ចូលអត្ថបទខ្មែរ រួចសាកល្បងអានតាមសំឡេងដែល Browser មាន។ ផ្នែកថតសំឡេងអាចរក្សាទុកជាគំរូសម្រាប់ការភ្ជាប់ AI នៅពេលក្រោយ។</p>
+  </section>
+  <section class="card">
+    <h3>✍️ ១. បញ្ចូលអត្ថបទ</h3>
+    <label class="label" for="text">អត្ថបទដែលអ្នកចង់ឱ្យអាន</label>
+    <textarea id="text" maxlength="3000" placeholder="សូមវាយអត្ថបទភាសាខ្មែររបស់អ្នកនៅទីនេះ...">សួស្តីអ្នកទាំងអស់គ្នា! សូមស្វាគមន៍មកកាន់ Khmer Voice AI។</textarea>
+    <div class="count"><span id="count">0</span>/3000 តួអក្សរ</div>
+    <div class="actions">
+      <button class="primary" id="speak">▶ សាកល្បងអានអត្ថបទ</button>
+      <button class="secondary" id="stop">■ បញ្ឈប់</button>
+    </div>
+    <div class="status" id="ttsStatus">ស្ថានភាព៖ រង់ចាំសាកល្បង។ សំឡេងអាស្រ័យលើសំឡេងដែលមាននៅក្នុង Browser/ទូរសព្ទ។</div>
+  </section>
+  <section class="card">
+    <h3>🎙️ ២. ថតសំឡេងផ្ទាល់ខ្លួន</h3>
+    <p class="small">ថតសំឡេងស្អាតៗនៅកន្លែងស្ងាត់។ កំណត់ចំណាំ៖ ការថតនេះគ្រាន់តែបង្កើតឯកសារគំរូប៉ុណ្ណោះ មិនទាន់បង្រៀន AI ឱ្យចម្លងសំឡេងទេ។</p>
+    <div class="wave" aria-hidden="true"><i style="--h:15px"></i><i style="--h:26px"></i><i style="--h:38px"></i><i style="--h:20px"></i><i style="--h:48px"></i><i style="--h:29px"></i><i style="--h:40px"></i><i style="--h:17px"></i><i style="--h:33px"></i><i style="--h:50px"></i><i style="--h:24px"></i><i style="--h:37px"></i><i style="--h:18px"></i><i style="--h:42px"></i><i style="--h:28px"></i><i style="--h:15px"></i><i style="--h:35px"></i><i style="--h:22px"></i></div>
+    <div class="recordrow">
+      <button class="primary" id="record">● ចាប់ផ្ដើមថត</button>
+      <button class="danger" id="finish" disabled>■ បញ្ឈប់ថត</button>
+    </div>
+    <div class="status" id="recStatus">មិនទាន់មានការថតទេ។ ចុច “ចាប់ផ្ដើមថត” ហើយអនុញ្ញាតឱ្យ Browser ប្រើមីក្រូហ្វូន។</div>
+    <audio id="audio" controls class="hidden"></audio>
+    <div class="actions">
+      <label class="filebtn" for="upload">📁 ជ្រើសឯកសារសំឡេង</label><input id="upload" type="file" accept="audio/*" class="hidden">
+      <button class="secondary" id="download" disabled>⬇ ទាញយកសំឡេង</button>
+    </div>
+    <p class="small">ទ្រង់ទ្រាយថតអាចជា WebM ឬទ្រង់ទ្រាយដែល Browser គាំទ្រ។ ការទាញយកឯកសារថតមិនមែនជា MP3 conversion ទេ។</p>
+  </section>
+  <section class="card">
+    <h3>🧠 ៣. ការភ្ជាប់ AI Voice Cloning</h3>
+    <p class="small">មុខងារនេះមិនទាន់ដំណើរការនៅក្នុង Demo ទេ។ ដើម្បីឱ្យ AI រៀនពីសំឡេងអ្នក ហើយអានអត្ថបទថ្មីៗ ត្រូវភ្ជាប់ទៅ Backend/API ដែលគាំទ្រការបង្កើតសំឡេង និងភាសាខ្មែរ។ API key ត្រូវរក្សាទុកនៅ Backend មិនត្រូវដាក់ក្នុង HTML ឬ JavaScript សាធារណៈឡើយ។</p>
+    <div class="status">ស្ថានភាព AI៖ មិនទាន់ភ្ជាប់ · Demo នេះមិនផ្ញើសំឡេង ឬអត្ថបទរបស់អ្នកទៅម៉ាស៊ីនមេណាមួយទេ។</div>
+  </section>
+  <footer class="footer">Khmer Voice AI · គំរូដំបូងសម្រាប់សាកល្បង<br>ប្រើសំឡេងផ្ទាល់ខ្លួនរបស់អ្នក ឬសំឡេងដែលអ្នកមានការអនុញ្ញាត។</footer>
+</main>
+<script>
+const textBox=document.getElementById('text'), count=document.getElementById('count'), ttsStatus=document.getElementById('ttsStatus');
+function updateCount(){count.textContent=[...textBox.value].length}
+textBox.addEventListener('input',updateCount);updateCount();
+document.getElementById('speak').addEventListener('click',()=>{
+  const value=textBox.value.trim();
+  if(!value){ttsStatus.textContent='សូមបញ្ចូលអត្ថបទជាមុនសិន។';return}
+  if(!('speechSynthesis' in window)){ttsStatus.textContent='Browser នេះមិនគាំទ្រការអានអត្ថបទទេ។ សាកល្បង Chrome ជំនាន់ថ្មី។';return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(value);u.lang='km-KH';
+  const voices=speechSynthesis.getVoices();const km=voices.find(v=>/^km([-_]|$)/i.test(v.lang));
+  if(km)u.voice=km;
+  u.onstart=()=>ttsStatus.textContent=km?'កំពុងអានដោយសំឡេងខ្មែរដែលមានក្នុង Browser។':'កំពុងសាកល្បងអាន។ ប្រសិនបើសំឡេងមិនមែនខ្មែរ ឬមិនឮ នោះ Browser ប្រហែលមិនមានសំឡេងខ្មែរទេ។';
+  u.onerror=(e)=>ttsStatus.textContent='មិនអាចអានបាន ('+e.error+')។ សំឡេងខ្មែរអាចមិនមាននៅលើឧបករណ៍នេះ។';
+  u.onend=()=>ttsStatus.textContent='ការសាកល្បងអានបានបញ្ចប់។ នេះមិនមែនជាសំឡេង AI clone ទេ។';
+  speechSynthesis.speak(u);
+});
+document.getElementById('stop').addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();ttsStatus.textContent='បានបញ្ឈប់ការអាន។'});
+let recorder=null,chunks=[],recordedBlob=null,stream=null;
+const recStatus=document.getElementById('recStatus'), recordBtn=document.getElementById('record'), finishBtn=document.getElementById('finish'), audio=document.getElementById('audio'), downloadBtn=document.getElementById('download');
+recordBtn.addEventListener('click',async()=>{
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){recStatus.textContent='Browser នេះមិនគាំទ្រការថតសំឡេងទេ។ សូមប្រើ Chrome ថ្មី និង HTTPS។';return}
+  try{
+    stream=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];
+    recorder=new MediaRecorder(stream);recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+    recorder.onstop=()=>{recordedBlob=new Blob(chunks,{type:recorder.mimeType||'audio/webm'});audio.src=URL.createObjectURL(recordedBlob);audio.classList.remove('hidden');downloadBtn.disabled=false;recStatus.textContent='បានថតរួចរាល់។ អ្នកអាចចាក់ស្ដាប់ ឬទាញយកឯកសារគំរូបាន។';stream.getTracks().forEach(t=>t.stop())};
+    recorder.start();recordBtn.disabled=true;finishBtn.disabled=false;recStatus.textContent='កំពុងថត... និយាយឱ្យច្បាស់ ហើយចុចបញ្ឈប់ពេលរួចរាល់។';
+  }catch(err){recStatus.textContent='មិនអាចចូលប្រើមីក្រូហ្វូនបានទេ។ សូមអនុញ្ញាតសិទ្ធិ Microphone ហើយសាកល្បងម្ដងទៀត។'}
+});
+finishBtn.addEventListener('click',()=>{if(recorder&&recorder.state!=='inactive')recorder.stop();recordBtn.disabled=false;finishBtn.disabled=true});
+downloadBtn.addEventListener('click',()=>{
+  if(!recordedBlob)return;
+  const a=document.createElement('a');a.href=URL.createObjectURL(recordedBlob);a.download='khmer-voice-sample.'+((recordedBlob.type.includes('ogg'))?'ogg':(recordedBlob.type.includes('mp4'))?'m4a':'webm');document.body.appendChild(a);a.click();a.remove();
+});
+document.getElementById('upload').addEventListener('change',e=>{
+ const f=e.target.files&&e.target.files[0];if(!f)return;
+ if(!f.type.startsWith('audio/')){recStatus.textContent='សូមជ្រើសឯកសារសំឡេង។';return}
+ recordedBlob=f;audio.src=URL.createObjectURL(f);audio.classList.remove('hidden');downloadBtn.disabled=false;recStatus.textContent='បានជ្រើសឯកសារ៖ '+f.name+'។ ឯកសារនៅក្នុងឧបករណ៍នេះប៉ុណ្ណោះ រហូតដល់អ្នកភ្ជាប់ Backend។';
+});
+</script>
+</body>
+</html>
